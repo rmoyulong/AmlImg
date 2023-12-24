@@ -29,13 +29,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWRT_DATE: $(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
         run: bash ./buildAllPlatforms.sh
-
-          #信息
-          export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
-          echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV
           
       - name: 整理固件
         run: |
+          #信息
+          export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
+          echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV        
           mkdir -p outfile
           sudo cp build/* ./outfile
 
