@@ -28,7 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWRT_DATE: $(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
-          OWRT_VER: 0.3.2
+          OWRT_VER: v0.3.2
         run: bash ./buildAllPlatforms.sh "${{ env.OWRT_VER  }}"
           
       - name: 整理固件
@@ -45,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: "${{ env.OWRT_VER  }}"
+          tag_name: ${{ env.OWRT_VER  }}
           files: outfile/*
           body: |
             自用玩客云AmlImg打包工具！刷写底包将抹去所有信息！
