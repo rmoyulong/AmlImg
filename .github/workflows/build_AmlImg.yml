@@ -28,13 +28,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWRT_DATE: $(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
-        run: bash ./buildAllPlatforms.sh
+          OWRT_VER: 0.3.2
+        run: bash ./buildAllPlatforms.sh "${{ env.OWRT_VER  }}"
           
       - name: 整理固件
         run: |
           #信息
           export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
-          echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV        
+          echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV
+          echo "OWRT_VER=$OWRT_VER" >> $GITHUB_ENV          
           mkdir -p outfile
           sudo cp bin/* ./outfile
 
@@ -43,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: Onecloud_AmlImg_${{ env.OWRT_DATE }}
+          tag_name: "${{ env.OWRT_VER  }}"
           files: outfile/*
           body: |
             自用玩客云AmlImg打包工具！刷写底包将抹去所有信息！
