@@ -36,7 +36,7 @@ jobs:
           export OWRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
           echo "OWRT_DATE=$OWRT_DATE" >> $GITHUB_ENV        
           mkdir -p outfile
-          sudo cp build/* ./outfile
+          sudo cp bin/* ./outfile
 
       - name: 上传AmlImg
         uses: rmoyulong/action-gh-release@master
