@@ -42,15 +42,15 @@ jobs:
           sudo cp bin/* ./outfile
 
       - name: 上传AmlImg
-        uses: rmoyulong/action-gh-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ env.OWRT_VER  }}
-          files: outfile/*
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.OWRT_VER  }}
           body: |
             自用玩客云AmlImg打包工具！刷写底包将抹去所有信息！
             =============基本信息============
 
             源码：https://github.com/hzyitc/AmlImg
             平台：liunx/armv7
+          artifacts: outfile/*
